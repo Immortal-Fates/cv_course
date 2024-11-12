@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named hw1
+# Target rules for targets named hw1.exe
 
 # Build rule for target.
-hw1: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hw1
-.PHONY : hw1
+hw1.exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hw1.exe
+.PHONY : hw1.exe
 
 # fast build rule for target.
-hw1/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw1.dir/build.make CMakeFiles/hw1.dir/build
-.PHONY : hw1/fast
+hw1.exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw1.exe.dir/build.make CMakeFiles/hw1.exe.dir/build
+.PHONY : hw1.exe/fast
 
 hw1.o: hw1.cpp.o
 .PHONY : hw1.o
 
 # target to build an object file
 hw1.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw1.dir/build.make CMakeFiles/hw1.dir/hw1.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw1.exe.dir/build.make CMakeFiles/hw1.exe.dir/hw1.cpp.o
 .PHONY : hw1.cpp.o
 
 hw1.i: hw1.cpp.i
@@ -142,7 +142,7 @@ hw1.i: hw1.cpp.i
 
 # target to preprocess a source file
 hw1.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw1.dir/build.make CMakeFiles/hw1.dir/hw1.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw1.exe.dir/build.make CMakeFiles/hw1.exe.dir/hw1.cpp.i
 .PHONY : hw1.cpp.i
 
 hw1.s: hw1.cpp.s
@@ -150,7 +150,7 @@ hw1.s: hw1.cpp.s
 
 # target to generate assembly for a file
 hw1.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw1.dir/build.make CMakeFiles/hw1.dir/hw1.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw1.exe.dir/build.make CMakeFiles/hw1.exe.dir/hw1.cpp.s
 .PHONY : hw1.cpp.s
 
 # Help Target
@@ -161,7 +161,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... hw1"
+	@echo "... hw1.exe"
 	@echo "... hw1.o"
 	@echo "... hw1.i"
 	@echo "... hw1.s"

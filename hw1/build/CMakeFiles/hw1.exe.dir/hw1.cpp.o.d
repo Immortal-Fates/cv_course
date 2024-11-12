@@ -1,4 +1,4 @@
-CMakeFiles/hw1.dir/hw1.cpp.o: \
+CMakeFiles/hw1.exe.dir/hw1.cpp.o: \
  /home/yxy/working_space/notes_in_zju/CS/cv/code/hw1/hw1.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/11/ctime \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \

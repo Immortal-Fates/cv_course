@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/yxy/working_space/notes_in_zju/CS/cv/code/hw1/hw1.cpp" "CMakeFiles/hw1.dir/hw1.cpp.o" "gcc" "CMakeFiles/hw1.dir/hw1.cpp.o.d"
+  "/home/yxy/working_space/notes_in_zju/CS/cv/code/hw1/hw1.cpp" "CMakeFiles/hw1.exe.dir/hw1.cpp.o" "gcc" "CMakeFiles/hw1.exe.dir/hw1.cpp.o.d"
   )
 
 # Targets to which this target links.
