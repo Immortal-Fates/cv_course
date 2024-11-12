@@ -25,10 +25,8 @@ int main()
     int fourcc = cv::VideoWriter::fourcc('m', 'p', '4', 'v');  // 使用'mp4v'编解码器
     cv::VideoWriter out(output_file, fourcc, 20.0, frameSize);
 
-    // 添加字幕的字体
+    // 添加字幕的字体和图标
     int font = cv::FONT_HERSHEY_SIMPLEX;  // 使用int类型代替FontFace
-
-    // 添加图标
 
     cv::Mat logo = cv::imread("../img/logo.jpeg");
     if (logo.empty()) {
@@ -39,12 +37,10 @@ int main()
     // 获取用户姓名
     std::string username = "yxy";
 
-    // 调整图标图像尺寸，使其更小
+    // 调整图标图像尺寸
     cv::resize(logo, logo, cv::Size(100, 100));
 
-    // 视频录制循环
     while (true) {
-        // 获取摄像头帧
         cv::Mat frame;
         cap >> frame;
         if (frame.empty()) {
