@@ -16,7 +16,9 @@ int main()
     tm *ltm = localtime(&now);
     char current_time[20];
     strftime(current_time, sizeof(current_time), "%Y-%m-%d_%H-%M-%S", ltm);
-    std::string output_file = "output_video_" + std::string(current_time) + ".mp4";
+    // 指定视频生成路径
+    std::string video_output_path = "../.asset/";
+    std::string output_file = video_output_path + "output_video_" + std::string(current_time) + ".mp4";
 
     // 创建视频写入器
     int frame_width = static_cast<int>(cap.get(cv::CAP_PROP_FRAME_WIDTH));
@@ -28,17 +30,17 @@ int main()
     // 添加字幕的字体和图标
     int font = cv::FONT_HERSHEY_SIMPLEX;  // 使用int类型代替FontFace
 
-    cv::Mat logo = cv::imread("../img/logo.jpeg");
+    cv::Mat logo = cv::imread("../.asset/logo.jpeg");
     if (logo.empty()) {
         std::cerr << "Error: Could not load logo image" << std::endl;
         return -1;
+    } else {
+        // 调整图标图像尺寸
+        cv::resize(logo, logo, cv::Size(100, 100));
     }
 
     // 获取用户姓名
     std::string username = "yxy";
-
-    // 调整图标图像尺寸
-    cv::resize(logo, logo, cv::Size(100, 100));
 
     while (true) {
         cv::Mat frame;
@@ -58,7 +60,9 @@ int main()
         cv::putText(frame, subtitle, cv::Point(50, frame.rows - 30), font, 1, cv::Scalar(255, 255, 255), 2);
 
         // 添加图标和用户名（左上角）
-        logo.copyTo(frame(cv::Rect(0, 0, logo.cols, logo.rows)));
+        if (!logo.empty()) {
+            logo.copyTo(frame(cv::Rect(0, 0, logo.cols, logo.rows)));
+        }
         cv::putText(frame, username, cv::Point(10, logo.rows + 30), font, 1, cv::Scalar(255, 255, 255), 2);
 
         // 将帧写入视频文件
