@@ -1,0 +1,14 @@
+{
+  "files.associations": {
+    "*.c": "c",
+    "bitset": "cpp",
+    "algorithm": "cpp",
+    "system_error": "cpp",
+    "array": "cpp",
+    "tuple": "cpp",
+    "type_traits": "cpp",
+    "bayes_functions_f16.h": "c",
+    "ostream": "cpp",
+    "iostream": "cpp"
+  }
+}

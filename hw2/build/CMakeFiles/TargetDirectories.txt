@@ -1,0 +1,3 @@
+/home/yxy/working_space/notes_in_zju/CS/cv/code/hw2/build/CMakeFiles/hw2.dir
+/home/yxy/working_space/notes_in_zju/CS/cv/code/hw2/build/CMakeFiles/edit_cache.dir
+/home/yxy/working_space/notes_in_zju/CS/cv/code/hw2/build/CMakeFiles/rebuild_cache.dir
