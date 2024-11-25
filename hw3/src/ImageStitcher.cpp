@@ -1,6 +1,6 @@
 /**
  *******************************************************************************
- * @file      : hw3.cpp
+ * @file      : ImageStitcher.cpp
  * @brief     :
  * @history   :
  *  Version     Date            Author          Note
@@ -8,20 +8,12 @@
  *******************************************************************************
  * @attention :
  *******************************************************************************
- *  Copyright (c) Zhejiang University.
+ *  Copyright (c) 2024 Hello World Team, Zhejiang University.
  *  All Rights Reserved.
  *******************************************************************************
  */
 /* Includes ------------------------------------------------------------------*/
-#include <filesystem>
-#include <iostream>
-#include <opencv2/opencv.hpp>
-#include <vector>
-
 #include "ImageStitcher.hpp"
-
-using namespace cv;
-using namespace std;
 /* Private macro -------------------------------------------------------------*/
 /* Private constants ---------------------------------------------------------*/
 /* Private types -------------------------------------------------------------*/
@@ -29,33 +21,3 @@ using namespace std;
 /* Private function prototypes -----------------------------------------------*/
 /* External variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
-
-int main()
-{
-    // 包含所有图像的路径
-    vector<string> image_paths;
-    string directory = "../assets/yosemite_test/";
-
-    for (const auto& entry : std::filesystem::directory_iterator(directory)) {
-        if (entry.path().extension() == ".jpg") {
-            image_paths.push_back(entry.path().string());
-        }
-    }
-
-    vector<Mat> images;
-    for (const auto& path : image_paths) {
-        Mat image = imread(path);
-        if (image.empty()) {
-            cerr << "Error: Could not load image " << path << endl;
-            return -1;
-        }
-        images.push_back(image);
-    }
-
-    ImageStitcher stitcher;
-    Mat stitched_image = stitcher.stitchImages(images);
-    imshow("Stitched Image", stitched_image);
-    waitKey(0);
-
-    return 0;
-}
