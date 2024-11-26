@@ -83,6 +83,7 @@ class HarrisCornerDetector
                             continue;
                         if (R.at<uint8_t>(i + k, j + l) >= value) {
                             isLocalMax = false;
+
                             break;
                         }
                     }
@@ -114,7 +115,7 @@ int main()
 
     namedWindow("Harris Corner Detection", WINDOW_AUTOSIZE);
 
-    HarrisCornerDetector detector(3, 0.04, 10);
+    HarrisCornerDetector detector(3, 0.04, 00);
 
     while (true) {
         Mat frame;

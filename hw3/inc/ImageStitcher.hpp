@@ -17,6 +17,8 @@
 #define IMAGESTITCHER_HPP_
 
 /* Includes ------------------------------------------------------------------*/
+#include <math.h>
+
 #include <iostream>
 #include <opencv2/opencv.hpp>
 #include <vector>
@@ -48,7 +50,6 @@ class ImageStitcher
         Mat image_with_keypoints;
         drawKeypoints(image, keypoints, image_with_keypoints, Scalar(0, 255, 0), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
         imshow("Image with Keypoints", image_with_keypoints);
-        waitKey(0);
         return keypoints;
     }
 
@@ -63,122 +64,218 @@ class ImageStitcher
                 good_matches.push_back(m[0]);
             }
         }
-        // 将匹配的特征点绘制到图像上
-        Mat image_matches;
-        drawMatches(images[0], keypoints_list[0], images[1], keypoints_list[1], good_matches, image_matches);
-        imshow("Image Matches", image_matches);
-        waitKey(0);
-
         return good_matches;
     }
 
-    /**
-     * @brief       计算单应性矩阵
-     * @arg         None
-     * @retval       None
-     * @note        None
-     */
     Mat estimateHomography(const vector<KeyPoint>& keypoints1, const vector<KeyPoint>& keypoints2, const vector<DMatch>& good_matches)
     {
         vector<Point2f> src_pts, dst_pts;
         for (const auto& m : good_matches) {
-            src_pts.push_back(keypoints1[m.queryIdx].pt);
-            dst_pts.push_back(keypoints2[m.trainIdx].pt);
+            dst_pts.push_back(keypoints1[m.queryIdx].pt);
+            src_pts.push_back(keypoints2[m.trainIdx].pt);
         }
-        Mat M;
-        findHomography(src_pts, dst_pts, M, RANSAC, 5.0);
-        return M;
-    }
-
-    /**
-     * @brief       图像进行透视变换
-     * @param        image:
-     * @param        M:
-     * @param        width:
-     * @param        height:
-     * @arg         None
-     * @retval       None
-     * @note        None
-     */
-    Mat warpImage(const Mat& image, const Mat& M, int width, int height)
-    {
-        Mat warped_image;
-        warpPerspective(image, warped_image, M, Size(width, height));
-        return warped_image;
-    }
-
-    Mat blendImages(const Mat& image1, const Mat& image2, int overlap_width)
-    {
-        vector<Mat> pyr1, pyr2, pyr_blend;
-
-        // 构建高斯金字塔
-        Mat temp1 = image1.clone();
-        Mat temp2 = image2.clone();
-        for (int i = 0; i < levels; ++i) {
-            pyr1.push_back(temp1);
-            pyr2.push_back(temp2);
-            pyrDown(temp1, temp1);
-            pyrDown(temp2, temp2);
+        // 检查匹配点的数量是否足够
+        if (src_pts.size() < 4 || dst_pts.size() < 4) {
+            throw std::runtime_error("Not enough matches to compute homography");
         }
 
-        // 构建拉普拉斯金字塔
+        Mat M = findHomography(src_pts, dst_pts, RANSAC, 5.0);
+
+        // 检查返回的单应矩阵是否为 3x3
+        if (M.rows != 3 || M.cols != 3) {
+            throw std::runtime_error("Homography matrix is not 3x3");
+        }
+        Mat M_float;
+        M.convertTo(M_float, CV_32F);
+        cout << "Homography matrix" << M_float << endl;
+        return M_float;
+    }
+
+    // Function to create a Gaussian pyramid
+    void createGaussianPyramid(const Mat& image, vector<Mat>& gaussianPyramid, int levels)
+    {
+        gaussianPyramid.push_back(image.clone());
+        Mat currentImage = image.clone();
+        for (int i = 1; i < levels; ++i) {
+            if (currentImage.cols % 2 != 0) {
+                resize(currentImage, currentImage, Size(currentImage.cols - 1, currentImage.rows));
+            }
+            if (currentImage.rows % 2 != 0) {
+                resize(currentImage, currentImage, Size(currentImage.cols, currentImage.rows - 1));
+            }
+            Mat downsampled;
+            pyrDown(currentImage, downsampled);
+            gaussianPyramid.push_back(downsampled);
+            currentImage = downsampled;
+        }
+    }
+
+    // Function to create a Laplacian pyramid
+    void createLaplacianPyramid(const vector<Mat>& gaussianPyramid, vector<Mat>& laplacianPyramid, int levels)
+    {
         for (int i = 0; i < levels - 1; ++i) {
-            Mat lap1, lap2;
-            pyrUp(pyr1[i + 1], lap1, pyr1[i].size());
-            pyrUp(pyr2[i + 1], lap2, pyr2[i].size());
-            lap1 = pyr1[i] - lap1;
-            lap2 = pyr2[i] - lap2;
-            pyr_blend.push_back(lap1 + lap2);
+            Mat gaussianNextLevel;
+            // cout << "gaussianPyramid[i].size():" << gaussianPyramid[i].size() << endl;
+            // cout << "gaussianPyramid[i + 1].size():" << gaussianPyramid[i + 1].size() << endl;
+
+            pyrUp(gaussianPyramid[i + 1], gaussianNextLevel);
+            Mat laplacian = gaussianPyramid[i] - gaussianNextLevel;
+            laplacianPyramid.push_back(laplacian);
+        }
+        laplacianPyramid.push_back(gaussianPyramid[levels - 1]);
+    }
+    Mat blendImages(Mat& image1, Mat& image2)
+    {
+        int levels = 4;  // Number of levels in the pyramid
+        // 将图像resize为2^4=16的倍数
+        if (image1.cols % 16 != 0) {
+            resize(image1, image1, Size(image1.cols - image1.cols % 16, image1.rows));
+        }
+        if (image1.rows % 16 != 0) {
+            resize(image1, image1, Size(image1.cols, image1.rows - image1.rows % 16));
+        }
+        resize(image2, image2, Size(image1.cols, image1.rows));
+
+        // Create Gaussian pyramids for both images
+        vector<Mat> gaussianPyramid1, gaussianPyramid2;
+        createGaussianPyramid(image1, gaussianPyramid1, levels);
+        createGaussianPyramid(image2, gaussianPyramid2, levels);
+
+        // Create Laplacian pyramids for both images
+        vector<Mat> laplacianPyramid1, laplacianPyramid2;
+        createLaplacianPyramid(gaussianPyramid1, laplacianPyramid1, levels);
+        createLaplacianPyramid(gaussianPyramid2, laplacianPyramid2, levels);
+
+        static int count = 0;
+        count++;
+        cout << "count: " << count << endl;
+
+        // Blend the images at each level of the pyramid
+        vector<Mat> blendedPyramid;
+        for (int i = 0; i < levels; ++i) {
+            int width = laplacianPyramid1[i].cols;
+            int height = laplacianPyramid1[i].rows;
+            Mat blended(height, width, laplacianPyramid1[i].type());
+            cout << "width: " << width << " height: " << height << endl;
+            Mat mask = Mat::zeros(height, width, CV_32F);
+            float begin_col = -1.0f;
+            int overlap_width = 0;
+            // 转换为灰度图再进行计算
+            Mat gray1, gray2;
+            cvtColor(laplacianPyramid1[i], gray1, COLOR_BGR2GRAY);
+            cvtColor(laplacianPyramid2[i], gray2, COLOR_BGR2GRAY);
+            for (int col = 0; col < width; ++col) {
+                if (sum(gray1.col(col))[0] > 0 && sum(gray2.col(col))[0] > 0) {
+                    if (begin_col == -1.0f) {
+                        begin_col = col;
+                    }
+                    overlap_width++;
+                } else if (sum(gray1.col(col))[0] > 0) {
+                    mask.col(col) = 1;
+                } else if (sum(gray2.col(col))[0] > 0) {
+                    mask.col(col) = 0;
+                }
+            }
+            // 重叠部分
+            for (int col = begin_col; col < begin_col + overlap_width; ++col) {
+                float alpha = 1 - (col - begin_col) / overlap_width;
+                mask.col(col) = alpha;
+            }
+            Mat mask2 = 1 - mask;
+            Mat expand_mask1, expand_mask2;
+            vector<Mat> channels1(3, mask), channels2(3, mask2);
+            merge(channels1, expand_mask1);
+            merge(channels2, expand_mask2);
+
+            Mat leftPart, rightPart;
+            laplacianPyramid1[i].convertTo(leftPart, CV_32F);
+            laplacianPyramid2[i].convertTo(rightPart, CV_32F);
+            // 对于重叠部分, 使用简单的平均值进行混合,其他部分使用原来有的图像
+            blended = leftPart.mul(expand_mask1) + rightPart.mul(expand_mask2);
+            blendedPyramid.push_back(blended);
         }
 
-        // 重建图像
-        Mat blended_image = pyr_blend.back();
+        // Reconstruct
+        Mat blendedImage = blendedPyramid[levels - 1];
         for (int i = levels - 2; i >= 0; --i) {
-            pyrUp(blended_image, blended_image, pyr_blend[i].size());
-            blended_image += pyr_blend[i];
+            pyrUp(blendedImage, blendedImage, blendedPyramid[i].size());
+            blendedImage += blendedPyramid[i];
         }
 
-        return blended_image;
+        blendedImage.convertTo(blendedImage, CV_8UC3);
+        // 去除后面纯黑的列
+        int col = blendedImage.cols - 1;
+        Mat gray_img;
+        cvtColor(blendedImage, gray_img, COLOR_BGR2GRAY);
+        while (sum(gray_img.col(col))[0] == 0) {
+            col--;
+        }
+        blendedImage = blendedImage.colRange(0, col + 1);
+
+        return blendedImage;
+    }
+
+    Mat stitchTwoImages(Mat& img1, Mat& img2, Mat& aff_mat)
+    {
+        // 构建一个空的全景图像来保存拼接结果
+        int height = std::max(img1.rows, img2.rows);
+        int width = img1.cols + img2.cols;
+        Mat pano(height, width, CV_8UC3, Scalar(0, 0, 0));
+
+        // 将仿射矩阵传递给 warpAffine
+        aff_mat.convertTo(aff_mat, CV_64FC1);
+        Mat warp_mat(2, 3, CV_64FC1);
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
+                warp_mat.at<double>(i, j) = aff_mat.at<double>(i, j);
+            }
+        }
+
+        Mat src1 = Mat::zeros(height, width, img1.type());
+        img1.copyTo(src1.rowRange(0, img1.rows).colRange(0, img1.cols));
+        Mat src2 = Mat::zeros(height, width, img2.type());
+        warpAffine(img2, src2, warp_mat, src2.size());
+
+        // 混合两张图像: pyramid blend
+        pano = blendImages(src1, src2);
+
+        return pano;
     }
 
     Mat stitchImages(const vector<Mat>& images)
     {
-        vector<vector<KeyPoint>> keypoints_list;
-        for (const auto& image : images) {
-            keypoints_list.push_back(detectAndComputeFeatures(image));
+        if (images.size() < 2) {
+            throw std::runtime_error("Need at least two images to stitch");
+        }
+        Mat pano = images[0].clone();
+        for (int i = 1; i < images.size(); i++) {
+            vector<KeyPoint> keypoints1 = detectAndComputeFeatures(pano);
+            vector<KeyPoint> keypoints2 = detectAndComputeFeatures(images[i]);
+
+            vector<DMatch> good_matches = matchFeatures(getDescriptors(0), getDescriptors(1));
+            Mat homography = estimateHomography(keypoints1, keypoints2, good_matches);
+            Mat temp_image2 = images[i].clone();
+            Mat temp = stitchTwoImages(pano, temp_image2, homography);
+            pano = temp.clone();
+            // 清空描述符列表
+            descriptors_list.clear();
         }
 
-        vector<Mat> homographies;
-        for (size_t i = 0; i < images.size() - 1; ++i) {
-            vector<DMatch> good_matches = matchFeatures(descriptors_list[i], descriptors_list[i + 1]);
-            Mat M = estimateHomography(keypoints_list[i], keypoints_list[i + 1], good_matches);
-            homographies.push_back(M);
-        }
+        imshow("Stitched Image", pano);
+        waitKey(0);
+        return pano;
+    }
 
-        int width = images[0].cols + images.back().cols;
-        int height = max(images[0].rows, images.back().rows);
-
-        vector<Mat> warped_images;
-        warped_images.push_back(images[0]);
-        for (size_t i = 0; i < images.size() - 1; ++i) {
-            Mat warped_image = warpImage(images[i + 1], homographies[i], width, height);
-            warped_images.push_back(warped_image);
-        }
-
-        Mat stitched_image = warped_images[0];
-        for (size_t i = 0; i < warped_images.size() - 1; ++i) {
-            int overlap_width = min(warped_images[i].cols, warped_images[i + 1].cols);
-            Mat blended_image = blendImages(warped_images[i], warped_images[i + 1], overlap_width);
-            stitched_image = blended_image;
-        }
-
-        return stitched_image;
+    Mat getDescriptors(int index) const
+    {
+        return descriptors_list[index];
     }
 
    private:
     Ptr<SIFT> sift;
     vector<Mat> descriptors_list;
 };
+
 /* Exported variables --------------------------------------------------------*/
 /* Exported function prototypes ----------------------------------------------*/
 

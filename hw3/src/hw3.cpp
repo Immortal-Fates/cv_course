@@ -32,15 +32,19 @@ using namespace std;
 
 int main()
 {
-    // 包含所有图像的路径
     vector<string> image_paths;
-    string directory = "../assets/yosemite_test/";
+    // string directory = "../assets/yosemite_test/";
+    string directory = "../assets/test_img/";
 
     for (const auto& entry : std::filesystem::directory_iterator(directory)) {
-        if (entry.path().extension() == ".jpg") {
+        if (entry.path().extension() == ".jpeg") {
             image_paths.push_back(entry.path().string());
+            cout << "Found image: " << entry.path().string() << endl;
         }
     }
+
+    // 读入图片时,图片路径的顺序会影响拼接的结果
+    sort(image_paths.begin(), image_paths.end());
 
     vector<Mat> images;
     for (const auto& path : image_paths) {
@@ -55,7 +59,13 @@ int main()
     ImageStitcher stitcher;
     Mat stitched_image = stitcher.stitchImages(images);
     imshow("Stitched Image", stitched_image);
-    waitKey(0);
+    // save img
+    string save_path = directory + "stitched_image.jpg";
+    imwrite(save_path, stitched_image);
+
+    // press q to exit
+    while (waitKey(1) != 'q') {
+    }
 
     return 0;
 }

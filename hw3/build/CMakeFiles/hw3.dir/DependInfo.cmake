@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/yxy/working_space/notes_in_zju/CS/cv/code/hw3/src/ImageStitcher.cpp" "CMakeFiles/hw3.dir/src/ImageStitcher.cpp.o" "gcc" "CMakeFiles/hw3.dir/src/ImageStitcher.cpp.o.d"
   "/home/yxy/working_space/notes_in_zju/CS/cv/code/hw3/src/hw3.cpp" "CMakeFiles/hw3.dir/src/hw3.cpp.o" "gcc" "CMakeFiles/hw3.dir/src/hw3.cpp.o.d"
   )
 

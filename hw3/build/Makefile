@@ -129,6 +129,30 @@ hw3/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw3.dir/build.make CMakeFiles/hw3.dir/build
 .PHONY : hw3/fast
 
+src/ImageStitcher.o: src/ImageStitcher.cpp.o
+.PHONY : src/ImageStitcher.o
+
+# target to build an object file
+src/ImageStitcher.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw3.dir/build.make CMakeFiles/hw3.dir/src/ImageStitcher.cpp.o
+.PHONY : src/ImageStitcher.cpp.o
+
+src/ImageStitcher.i: src/ImageStitcher.cpp.i
+.PHONY : src/ImageStitcher.i
+
+# target to preprocess a source file
+src/ImageStitcher.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw3.dir/build.make CMakeFiles/hw3.dir/src/ImageStitcher.cpp.i
+.PHONY : src/ImageStitcher.cpp.i
+
+src/ImageStitcher.s: src/ImageStitcher.cpp.s
+.PHONY : src/ImageStitcher.s
+
+# target to generate assembly for a file
+src/ImageStitcher.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hw3.dir/build.make CMakeFiles/hw3.dir/src/ImageStitcher.cpp.s
+.PHONY : src/ImageStitcher.cpp.s
+
 src/hw3.o: src/hw3.cpp.o
 .PHONY : src/hw3.o
 
@@ -162,6 +186,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... hw3"
+	@echo "... src/ImageStitcher.o"
+	@echo "... src/ImageStitcher.i"
+	@echo "... src/ImageStitcher.s"
 	@echo "... src/hw3.o"
 	@echo "... src/hw3.i"
 	@echo "... src/hw3.s"

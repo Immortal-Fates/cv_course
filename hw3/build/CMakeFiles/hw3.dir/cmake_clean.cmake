@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/hw3.dir/src/ImageStitcher.cpp.o"
+  "CMakeFiles/hw3.dir/src/ImageStitcher.cpp.o.d"
   "CMakeFiles/hw3.dir/src/hw3.cpp.o"
   "CMakeFiles/hw3.dir/src/hw3.cpp.o.d"
   "hw3"
