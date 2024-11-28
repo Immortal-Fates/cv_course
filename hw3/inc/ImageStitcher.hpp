@@ -88,10 +88,10 @@ class ImageStitcher
         Mat M_float;
         M.convertTo(M_float, CV_32F);
         cout << "Homography matrix" << M_float << endl;
+
         return M_float;
     }
 
-    // Function to create a Gaussian pyramid
     void createGaussianPyramid(const Mat& image, vector<Mat>& gaussianPyramid, int levels)
     {
         gaussianPyramid.push_back(image.clone());
@@ -110,7 +110,6 @@ class ImageStitcher
         }
     }
 
-    // Function to create a Laplacian pyramid
     void createLaplacianPyramid(const vector<Mat>& gaussianPyramid, vector<Mat>& laplacianPyramid, int levels)
     {
         for (int i = 0; i < levels - 1; ++i) {
