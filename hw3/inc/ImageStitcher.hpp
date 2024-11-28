@@ -211,6 +211,13 @@ class ImageStitcher
             col--;
         }
         blendedImage = blendedImage.colRange(0, col + 1);
+        // 去除后面纯黑的行
+        int row = blendedImage.rows - 1;
+        while (sum(gray_img.row(row))[0] == 0) {
+            row--;
+        }
+        blendedImage = blendedImage.rowRange(0, row + 1);
+        imshow("Blended Image", blendedImage);
 
         return blendedImage;
     }
