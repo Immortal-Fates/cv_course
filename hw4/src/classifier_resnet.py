@@ -206,11 +206,11 @@ def main():
     # scheduler = optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=num_epochs)
 
     # Train the model
-    loss_list, val_loss_list, best_model_path = train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs, device)
+    # loss_list, val_loss_list, best_model_path = train_model(model, train_loader, val_loader, criterion, optimizer, scheduler, num_epochs, device)
     
     # Load the best model
-    model.load_state_dict(torch.load(best_model_path))
-    print(f'Best model loaded from {best_model_path}')
+    model.load_state_dict(torch.load('./model/ResNet_model2.pth'))
+    # print(f'Best model loaded from {best_model_path}')
     
     # Test the model
     test_model(model, test_loader, device)
@@ -220,8 +220,8 @@ def main():
 
     # Plot the loss curve
     plt.figure()
-    plt.plot(loss_list, label='Training Loss')
-    plt.plot(val_loss_list, label='Validation Loss')
+    # plt.plot(loss_list, label='Training Loss')
+    # plt.plot(val_loss_list, label='Validation Loss')
     plt.xlabel('Iteration')
     plt.ylabel('Loss')
     plt.title('Training and Validation Loss Curve')
