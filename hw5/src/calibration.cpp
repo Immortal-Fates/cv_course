@@ -242,8 +242,8 @@ int main(int argc, char** argv)
 
     calibrator.loadCoeff(output_path);
     // 输入一张平地拍摄的图片，输出俯瞰视角变换后的图片
-    std::string input_image_path = "../assets/bird_eye/img2.jpeg";
-    std::string output_image_path = "../assets/result/birds_eye_view.jpeg";
+    std::string input_image_path = "../assets/bird_eye/view.jpeg";
+    std::string output_image_path = "../assets/result/birdseye-view.jpeg";
     calibrator.transformToBirdsEyeView(input_image_path, output_image_path);
 
     cv::waitKey(0);           // 等待用户按键
