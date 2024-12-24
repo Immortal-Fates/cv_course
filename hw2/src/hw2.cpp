@@ -51,6 +51,8 @@ class HarrisCornerDetector
         Scalar mean, stddev;
         meanStdDev(R, mean, stddev);
         threshold_ = static_cast<int>(mean[0] + stddev[0]) + threshold_offset_;
+        // threshold_ = 80;
+
         cout << "threshold = " << threshold_ << endl;
 
         // 显示R图
