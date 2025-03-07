@@ -1,0 +1,8 @@
+/home/yxy/ws/notes_in_zju/CS/cv/code/hw6/build/CMakeFiles/problem1_1.exe.dir
+/home/yxy/ws/notes_in_zju/CS/cv/code/hw6/build/CMakeFiles/problem1_2.exe.dir
+/home/yxy/ws/notes_in_zju/CS/cv/code/hw6/build/CMakeFiles/problem1_3.exe.dir
+/home/yxy/ws/notes_in_zju/CS/cv/code/hw6/build/CMakeFiles/problem2_1.exe.dir
+/home/yxy/ws/notes_in_zju/CS/cv/code/hw6/build/CMakeFiles/problem2_2.exe.dir
+/home/yxy/ws/notes_in_zju/CS/cv/code/hw6/build/CMakeFiles/problem2_3.exe.dir
+/home/yxy/ws/notes_in_zju/CS/cv/code/hw6/build/CMakeFiles/edit_cache.dir
+/home/yxy/ws/notes_in_zju/CS/cv/code/hw6/build/CMakeFiles/rebuild_cache.dir

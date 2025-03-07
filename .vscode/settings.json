@@ -9,6 +9,8 @@
     "type_traits": "cpp",
     "bayes_functions_f16.h": "c",
     "ostream": "cpp",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "*.ipp": "cpp",
+    "string_view": "cpp"
   }
 }
