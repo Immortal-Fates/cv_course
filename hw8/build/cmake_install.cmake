@@ -1,4 +1,4 @@
-# Install script for directory: /home/yxy/ws/zju_ws/cv_course/hw7
+# Install script for directory: /home/yxy/ws/ws/zju_ws/cv_course/hw8
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/yxy/ws/zju_ws/cv_course/hw7/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/yxy/ws/ws/zju_ws/cv_course/hw8/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

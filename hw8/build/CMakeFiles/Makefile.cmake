@@ -49,6 +49,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/ft.exe.dir/DependInfo.cmake"
-  "CMakeFiles/filter.exe.dir/DependInfo.cmake"
+  "CMakeFiles/canny.exe.dir/DependInfo.cmake"
+  "CMakeFiles/hough.exe.dir/DependInfo.cmake"
   )

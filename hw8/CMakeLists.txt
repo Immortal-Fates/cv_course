@@ -1,11 +1,11 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
-project(HW2)
+project(HW3)
 
 find_package(OpenCV REQUIRED)
-add_executable(ft.exe src/ft.cpp)
-target_link_libraries(ft.exe ${OpenCV_LIBS})
+add_executable(canny.exe src/canny_detect.cpp)
+target_link_libraries(canny.exe ${OpenCV_LIBS})
 
-add_executable(filter.exe src/filter.cpp)
-target_link_libraries(filter.exe ${OpenCV_LIBS})
+add_executable(hough.exe src/hough_detect.cpp)
+target_link_libraries(hough.exe ${OpenCV_LIBS})

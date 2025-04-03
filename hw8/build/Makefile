@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/yxy/ws/zju_ws/cv_course/hw7
+CMAKE_SOURCE_DIR = /home/yxy/ws/ws/zju_ws/cv_course/hw8
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/yxy/ws/zju_ws/cv_course/hw7/build
+CMAKE_BINARY_DIR = /home/yxy/ws/ws/zju_ws/cv_course/hw8/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxy/ws/zju_ws/cv_course/hw7/build/CMakeFiles /home/yxy/ws/zju_ws/cv_course/hw7/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxy/ws/ws/zju_ws/cv_course/hw8/build/CMakeFiles /home/yxy/ws/ws/zju_ws/cv_course/hw8/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxy/ws/zju_ws/cv_course/hw7/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/yxy/ws/ws/zju_ws/cv_course/hw8/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,78 +117,78 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named ft.exe
+# Target rules for targets named canny.exe
 
 # Build rule for target.
-ft.exe: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 ft.exe
-.PHONY : ft.exe
+canny.exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 canny.exe
+.PHONY : canny.exe
 
 # fast build rule for target.
-ft.exe/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.exe.dir/build.make CMakeFiles/ft.exe.dir/build
-.PHONY : ft.exe/fast
+canny.exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/canny.exe.dir/build.make CMakeFiles/canny.exe.dir/build
+.PHONY : canny.exe/fast
 
 #=============================================================================
-# Target rules for targets named filter.exe
+# Target rules for targets named hough.exe
 
 # Build rule for target.
-filter.exe: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 filter.exe
-.PHONY : filter.exe
+hough.exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 hough.exe
+.PHONY : hough.exe
 
 # fast build rule for target.
-filter.exe/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/filter.exe.dir/build.make CMakeFiles/filter.exe.dir/build
-.PHONY : filter.exe/fast
+hough.exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hough.exe.dir/build.make CMakeFiles/hough.exe.dir/build
+.PHONY : hough.exe/fast
 
-src/filter.o: src/filter.cpp.o
-.PHONY : src/filter.o
-
-# target to build an object file
-src/filter.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/filter.exe.dir/build.make CMakeFiles/filter.exe.dir/src/filter.cpp.o
-.PHONY : src/filter.cpp.o
-
-src/filter.i: src/filter.cpp.i
-.PHONY : src/filter.i
-
-# target to preprocess a source file
-src/filter.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/filter.exe.dir/build.make CMakeFiles/filter.exe.dir/src/filter.cpp.i
-.PHONY : src/filter.cpp.i
-
-src/filter.s: src/filter.cpp.s
-.PHONY : src/filter.s
-
-# target to generate assembly for a file
-src/filter.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/filter.exe.dir/build.make CMakeFiles/filter.exe.dir/src/filter.cpp.s
-.PHONY : src/filter.cpp.s
-
-src/ft.o: src/ft.cpp.o
-.PHONY : src/ft.o
+src/canny_detect.o: src/canny_detect.cpp.o
+.PHONY : src/canny_detect.o
 
 # target to build an object file
-src/ft.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.exe.dir/build.make CMakeFiles/ft.exe.dir/src/ft.cpp.o
-.PHONY : src/ft.cpp.o
+src/canny_detect.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/canny.exe.dir/build.make CMakeFiles/canny.exe.dir/src/canny_detect.cpp.o
+.PHONY : src/canny_detect.cpp.o
 
-src/ft.i: src/ft.cpp.i
-.PHONY : src/ft.i
+src/canny_detect.i: src/canny_detect.cpp.i
+.PHONY : src/canny_detect.i
 
 # target to preprocess a source file
-src/ft.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.exe.dir/build.make CMakeFiles/ft.exe.dir/src/ft.cpp.i
-.PHONY : src/ft.cpp.i
+src/canny_detect.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/canny.exe.dir/build.make CMakeFiles/canny.exe.dir/src/canny_detect.cpp.i
+.PHONY : src/canny_detect.cpp.i
 
-src/ft.s: src/ft.cpp.s
-.PHONY : src/ft.s
+src/canny_detect.s: src/canny_detect.cpp.s
+.PHONY : src/canny_detect.s
 
 # target to generate assembly for a file
-src/ft.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/ft.exe.dir/build.make CMakeFiles/ft.exe.dir/src/ft.cpp.s
-.PHONY : src/ft.cpp.s
+src/canny_detect.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/canny.exe.dir/build.make CMakeFiles/canny.exe.dir/src/canny_detect.cpp.s
+.PHONY : src/canny_detect.cpp.s
+
+src/hough_detect.o: src/hough_detect.cpp.o
+.PHONY : src/hough_detect.o
+
+# target to build an object file
+src/hough_detect.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hough.exe.dir/build.make CMakeFiles/hough.exe.dir/src/hough_detect.cpp.o
+.PHONY : src/hough_detect.cpp.o
+
+src/hough_detect.i: src/hough_detect.cpp.i
+.PHONY : src/hough_detect.i
+
+# target to preprocess a source file
+src/hough_detect.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hough.exe.dir/build.make CMakeFiles/hough.exe.dir/src/hough_detect.cpp.i
+.PHONY : src/hough_detect.cpp.i
+
+src/hough_detect.s: src/hough_detect.cpp.s
+.PHONY : src/hough_detect.s
+
+# target to generate assembly for a file
+src/hough_detect.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/hough.exe.dir/build.make CMakeFiles/hough.exe.dir/src/hough_detect.cpp.s
+.PHONY : src/hough_detect.cpp.s
 
 # Help Target
 help:
@@ -198,14 +198,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... filter.exe"
-	@echo "... ft.exe"
-	@echo "... src/filter.o"
-	@echo "... src/filter.i"
-	@echo "... src/filter.s"
-	@echo "... src/ft.o"
-	@echo "... src/ft.i"
-	@echo "... src/ft.s"
+	@echo "... canny.exe"
+	@echo "... hough.exe"
+	@echo "... src/canny_detect.o"
+	@echo "... src/canny_detect.i"
+	@echo "... src/canny_detect.s"
+	@echo "... src/hough_detect.o"
+	@echo "... src/hough_detect.i"
+	@echo "... src/hough_detect.s"
 .PHONY : help
 
 
