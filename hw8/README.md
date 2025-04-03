@@ -2,7 +2,7 @@
 # 问题描述
 1.   利用canny算子对指定图像进行边缘检测。
 
-2.   利用hough变换对指定图像进行直线检测**。**
+2.   利用hough变换对指定图像进行直线检测。
 
 3.   尝试利用相似性原理相关的分割方法对指定图像进行分割。
 
@@ -31,31 +31,26 @@
 ```
 .
 ├── assets
-│   ├── imgA_freqHP.jpg
-│   ├── imgA_freqLP.jpg
-│   ├── imgA.jpg
-│   ├── imgA_spatialHP.jpg
-│   ├── imgA_spatialLP.jpg
-│   ├── imgB_freqHP.jpg
-│   ├── imgB_freqLP.jpg
-│   ├── imgB.jpg
-│   ├── imgB_spatialHP.jpg
-│   ├── imgB_spatialLP.jpg
-│   ├── magnitudeA.jpg
-│   ├── magnitudeB.jpg
-│   ├── phaseA.jpg
-│   ├── phaseB.jpg
-│   ├── resultAB.jpg
-│   └── resultBA.jpg
+│   ├── imgA.png
+│   ├── imgB.png
+│   ├── imgC.png
+│   └── result
+│       ├── edgesB.jpg
+│       ├── edgesC.jpg
+│       ├── edges.jpg
+│       ├── hough_resultA.jpg
+│       ├── hough_resultB.jpg
+│       ├── hough_resultC.jpg
+│       └── hough_result.jpg
 ├── build
-│   ├── filter.exe
-│   ├── ft.exe
+│   ├── hough.exe
+│   ├── img_seg.exe
 ├── CMakeLists.txt
 ├── docs
-│   ├── 实验报告HW2.pdf
+│   └── 实验报告HW3.pdf
 ├── README.md
 └── src
-    ├── filter.cpp
-    └── ft.cpp
+    ├── canny_detect.cpp
+    └── hough_detect.cpp
 ```
 
