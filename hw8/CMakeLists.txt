@@ -9,3 +9,6 @@ target_link_libraries(canny.exe ${OpenCV_LIBS})
 
 add_executable(hough.exe src/hough_detect.cpp)
 target_link_libraries(hough.exe ${OpenCV_LIBS})
+
+add_executable(seg.exe src/seg.cpp)
+target_link_libraries(seg.exe ${OpenCV_LIBS})

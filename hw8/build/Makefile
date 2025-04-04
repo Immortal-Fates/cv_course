@@ -142,6 +142,19 @@ hough.exe/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hough.exe.dir/build.make CMakeFiles/hough.exe.dir/build
 .PHONY : hough.exe/fast
 
+#=============================================================================
+# Target rules for targets named seg.exe
+
+# Build rule for target.
+seg.exe: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 seg.exe
+.PHONY : seg.exe
+
+# fast build rule for target.
+seg.exe/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/seg.exe.dir/build.make CMakeFiles/seg.exe.dir/build
+.PHONY : seg.exe/fast
+
 src/canny_detect.o: src/canny_detect.cpp.o
 .PHONY : src/canny_detect.o
 
@@ -190,6 +203,30 @@ src/hough_detect.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/hough.exe.dir/build.make CMakeFiles/hough.exe.dir/src/hough_detect.cpp.s
 .PHONY : src/hough_detect.cpp.s
 
+src/seg.o: src/seg.cpp.o
+.PHONY : src/seg.o
+
+# target to build an object file
+src/seg.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/seg.exe.dir/build.make CMakeFiles/seg.exe.dir/src/seg.cpp.o
+.PHONY : src/seg.cpp.o
+
+src/seg.i: src/seg.cpp.i
+.PHONY : src/seg.i
+
+# target to preprocess a source file
+src/seg.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/seg.exe.dir/build.make CMakeFiles/seg.exe.dir/src/seg.cpp.i
+.PHONY : src/seg.cpp.i
+
+src/seg.s: src/seg.cpp.s
+.PHONY : src/seg.s
+
+# target to generate assembly for a file
+src/seg.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/seg.exe.dir/build.make CMakeFiles/seg.exe.dir/src/seg.cpp.s
+.PHONY : src/seg.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -200,12 +237,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... canny.exe"
 	@echo "... hough.exe"
+	@echo "... seg.exe"
 	@echo "... src/canny_detect.o"
 	@echo "... src/canny_detect.i"
 	@echo "... src/canny_detect.s"
 	@echo "... src/hough_detect.o"
 	@echo "... src/hough_detect.i"
 	@echo "... src/hough_detect.s"
+	@echo "... src/seg.o"
+	@echo "... src/seg.i"
+	@echo "... src/seg.s"
 .PHONY : help
 
 

@@ -1,4 +1,5 @@
 /home/yxy/ws/ws/zju_ws/cv_course/hw8/build/CMakeFiles/canny.exe.dir
 /home/yxy/ws/ws/zju_ws/cv_course/hw8/build/CMakeFiles/hough.exe.dir
+/home/yxy/ws/ws/zju_ws/cv_course/hw8/build/CMakeFiles/seg.exe.dir
 /home/yxy/ws/ws/zju_ws/cv_course/hw8/build/CMakeFiles/edit_cache.dir
 /home/yxy/ws/ws/zju_ws/cv_course/hw8/build/CMakeFiles/rebuild_cache.dir
