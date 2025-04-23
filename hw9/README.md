@@ -41,3 +41,18 @@
     └── hough_detect.cpp
 ```
 
+# OpenCV使用
+- copyMakeBorder():Forms a border around an image.
+- merge():Creates one multi-channel array out of several single-channel ones.
+
+# Problem 
+- grayImg转换为CV_32F后，数值范围变为[0.0, 255.0]，而imshow()对浮点图像的默认处理方式为：
+    - 将像素值视为[0.0, 1.0]范围，超出1.0的值会被截断为白色
+    - 因此当像素值>1.0时，整个图像显示为纯白色
+
+- 四象限交换
+   离散傅里叶变换（DFT）特性：DFT默认将零频分量（直流分量）放在频谱的左上角（图像四角），高频分量分布在中心区域。四象限交换通过翻转频域矩阵，将零频分量移至中心，高频分量移至四角
+
+- 傅里叶变换对称性
+    实数图像的频域具有共轭对称性，未正确对齐会导致空域图像对称伪影
+

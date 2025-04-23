@@ -11,6 +11,12 @@
     "ostream": "cpp",
     "iostream": "cpp",
     "*.ipp": "cpp",
-    "string_view": "cpp"
+    "string_view": "cpp",
+    "cmath": "cpp",
+    "ratio": "cpp",
+    "forward_list": "cpp",
+    "list": "cpp",
+    "initializer_list": "cpp",
+    "utility": "cpp"
   }
 }

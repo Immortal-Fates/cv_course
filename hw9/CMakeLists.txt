@@ -1,14 +1,11 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.0)
 
-project(HW3)
+project(HW4)
 
 find_package(OpenCV REQUIRED)
-add_executable(canny.exe src/canny_detect.cpp)
-target_link_libraries(canny.exe ${OpenCV_LIBS})
+add_executable(blur_restoration.exe src/blur_restoration.cpp)
+target_link_libraries(blur_restoration.exe ${OpenCV_LIBS})
 
-add_executable(hough.exe src/hough_detect.cpp)
-target_link_libraries(hough.exe ${OpenCV_LIBS})
-
-add_executable(seg.exe src/seg.cpp)
-target_link_libraries(seg.exe ${OpenCV_LIBS})
+add_executable(restoration.exe src/restoration.cpp)
+target_link_libraries(restoration.exe ${OpenCV_LIBS})
