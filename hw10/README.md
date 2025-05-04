@@ -9,5 +9,18 @@
 # 目录结构
 
 ```
-
+.
+├── assets
+│   ├── extended_result.png
+│   ├── morphology_result.png
+│   └── src.png
+├── build
+│   ├── Makefile
+│   └── morphology.exe
+├── CMakeLists.txt
+├── docs
+│   └── HW5实验报告.pdf
+├── README.md
+└── src
+    └── morphology.cpp
 ```

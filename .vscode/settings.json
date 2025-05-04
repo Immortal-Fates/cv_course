@@ -17,6 +17,12 @@
     "forward_list": "cpp",
     "list": "cpp",
     "initializer_list": "cpp",
-    "utility": "cpp"
+    "utility": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "vector": "cpp",
+    "chrono": "cpp",
+    "compare": "cpp",
+    "functional": "cpp"
   }
 }
