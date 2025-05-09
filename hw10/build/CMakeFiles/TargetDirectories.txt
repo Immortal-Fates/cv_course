@@ -1,0 +1,3 @@
+/home/yxy/ws/ws/zju_ws/cv_course/hw10/build/CMakeFiles/morphology.exe.dir
+/home/yxy/ws/ws/zju_ws/cv_course/hw10/build/CMakeFiles/edit_cache.dir
+/home/yxy/ws/ws/zju_ws/cv_course/hw10/build/CMakeFiles/rebuild_cache.dir
